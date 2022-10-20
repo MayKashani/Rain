@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body { 
+            background-color: rgb(2, 2, 52);
+            overflow: hidden;
+        }
+
+        .thunder {
+            width: 100vw;
+            position: absolute;
+            height:100vh;
+            animation: thunder 10s linear 5s infinite;
+        }
+
+        .drop { 
+            width: 50px;    
+            top: 0;
+            height:1px;
+            opacity: 0;
+            background-color: whitesmoke;
+            position: absolute;
+            animation: rain 1s linear infinite;
+        }
+
+        @keyframes rain { 
+            from { 
+                transform: rotate(105deg) translateX(0);
+                opacity: 1;
+            }
+
+            to { 
+                transform:  rotate(105deg) translateX(calc(100vh + 20px));
+                opacity: 0.4
+            }
+        }
+
+
+        @keyframes thunder {
+            0% { 
+                background-color:transparent;
+            }
+
+            1% { 
+                background-color: rgb(229, 229, 234);
+            }
+
+            2% {
+                background-color: rgb(225, 225, 225, 0.7)
+            }
+
+            8% { 
+                background-color: transparent;
+            }
+        }
+    </style>
+    <script>
+        const DROPS_NUMBER = 100
+
+        function initRain() {
+            for (let i = 0; i < DROPS_NUMBER; i++) {
+                let drop = document.createElement("div");
+                drop.className = "drop";
+                drop.style.left = Math.floor(Math.random() * window.innerWidth) + "px";
+                drop.style.bottom = Math.floor(Math.random() * window.innerHeight) + "px";
+                drop.style.width = 20 + Math.floor(Math.random() * 0.3) + "px";
+                drop.style.animationDuration = 0.5 + (Math.random() * 0.3) + "s"; 
+                drop.style.animationDelay = (Math.random() * 5) + "s";
+                document.body.appendChild(drop)
+            }    
+            
+        }
+
+    </script>
+</head>
+<body onload="initRain()">
+    <div class="thunder"></div>
+</body>
+</html>
